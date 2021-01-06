@@ -31,7 +31,7 @@ class _DashBoardState extends State<DashBoard> {
     }
 
     Stream<QuerySnapshot> _query = Firestore.instance
-        .collection('Parameters')
+        .collection('Users')
         .document(widget.email)
         .collection("EachPara")
         // .where('email', isEqualTo: widget.email ?? "")
