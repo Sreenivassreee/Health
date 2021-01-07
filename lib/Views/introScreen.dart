@@ -24,29 +24,31 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.setState(() {});
-    abc();
+    // abc();
     checkNetWork();
   }
 
-  void abc() {
-    Future.delayed(Duration(milliseconds: 1000), () async {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => ThemeConsumer(
-            child: GoogleWithLogin(),
-          ),
-        ),
-      );
-    });
-  }
+  // void abc() {
+  //   Future.delayed(Duration(milliseconds: 1000), () async {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (BuildContext context) => ThemeConsumer(
+  //           child: GoogleWithLogin(),
+  //         ),
+  //       ),
+  //     );
+  //   });
+  // }
 
   checkNetWork() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var isLogin = preferences.getString("ISLOGIN");
     var email = preferences.getString("email");
+    var photo = preferences.getString("photoUrl");
+
     // print(isLogin);
-    // print(id);
+    print(photo);
 
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
@@ -54,12 +56,12 @@ class _IntroScreenState extends State<IntroScreen> {
       if (isLogin == "TRUE") {
         // print("id is $id");
         if (email != null) {
-          sleep(const Duration(microseconds: 2000));
+          sleep(const Duration(seconds: 2));
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (BuildContext context) => ThemeConsumer(
-                child: HomeDesign(email),
+                child: HomeDesign(email, photo),
               ),
             ),
           );
@@ -79,7 +81,7 @@ class _IntroScreenState extends State<IntroScreen> {
           logOut(context);
         }
       } else {
-        sleep(const Duration(microseconds: 1000));
+        sleep(const Duration(seconds: 2));
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -98,7 +100,7 @@ class _IntroScreenState extends State<IntroScreen> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,
       );
-      sleep(Duration(microseconds: 1000));
+      sleep(Duration(seconds: 2));
 
       // Navigator.pushReplacement(
       //   context,

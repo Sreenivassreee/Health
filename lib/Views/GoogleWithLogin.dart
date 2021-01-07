@@ -65,8 +65,10 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
         user = (await _auth.signInWithCredential(credential)).user;
         print("After displayName" + user.displayName);
         Pref.saveLoginStatusPrif();
+        FirePref.initialFirebasePrefSave(user);
         preferences = await SharedPreferences.getInstance();
         preferences.setString("email", user.email);
+        preferences.setString("photoUrl", user.photoUrl);
       } catch (e) {
         // ErrorPage(context: context, message: "Internet Problem");
         print(e);
@@ -97,9 +99,10 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeDesign(currentUser.email
-                          //  user, _googleSignIn
-                          ),
+                      builder: (context) =>
+                          HomeDesign(currentUser.email, currentUser.photoUrl
+                              //  user, _googleSignIn
+                              ),
                     ),
                   )
                 }

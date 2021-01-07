@@ -14,9 +14,9 @@ import 'package:flutter/services.dart';
 class HomeDesign extends StatefulWidget {
   // final VoidCallback signOut;
   var data;
-  String email;
+  String email, photoUrl;
   // final currentScore, currentLevel;
-  HomeDesign(this.email);
+  HomeDesign(this.email, this.photoUrl);
   @override
   HomeDesignState createState() => HomeDesignState();
 }
@@ -164,7 +164,7 @@ class HomeDesignState extends State<HomeDesign>
             Center(
                 // getPref(),
 
-                child: DashBoard(widget.email)
+                child: DashBoard(widget.email,widget.photoUrl)
                 //  DashBoard(
                 //   pId: mainPref.MainPId,
                 //   currentLevel: mainPref.MainCurrentLevel,
