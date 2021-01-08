@@ -1,5 +1,6 @@
 import 'package:Health/Views/Dash_Board.dart';
 import 'package:Health/Views/Settings.dart';
+import 'package:Health/Views/Upload_Pdf.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -113,8 +114,7 @@ class HomeDesignState extends State<HomeDesign>
                 ),
                 IconButton(
                   iconSize: 25.0,
-                  padding: EdgeInsets.only(right: 28.0),
-                  icon: Icon(Icons.photo_filter),
+                  icon: Icon(Icons.menu_book_rounded),
                   color: col == 1 ? Colors.orange[800] : Colors.white,
                   onPressed: () {
                     setState(() {
@@ -122,17 +122,16 @@ class HomeDesignState extends State<HomeDesign>
                     });
                   },
                 ),
-                IconButton(
-                  iconSize: 25.0,
-                  padding: EdgeInsets.only(left: 28.0),
-                  icon: Icon(Icons.developer_board),
-                  color: col == 2 ? Colors.orange[800] : Colors.white,
-                  onPressed: () {
-                    setState(() {
-                      _myPage.jumpToPage(2);
-                    });
-                  },
-                ),
+                // IconButton(
+                //   iconSize: 25.0,
+                //   icon: Icon(Icons.developer_board),
+                //   color: col == 2 ? Colors.orange[800] : Colors.white,
+                //   onPressed: () {
+                //     setState(() {
+                //       _myPage.jumpToPage(2);
+                //     });
+                //   },
+                // ),
                 IconButton(
                   iconSize: 25.0,
                   padding: EdgeInsets.only(right: 28.0),
@@ -164,7 +163,7 @@ class HomeDesignState extends State<HomeDesign>
             Center(
                 // getPref(),
 
-                child: DashBoard(widget.email,widget.photoUrl)
+                child: DashBoard(widget.email, widget.photoUrl)
                 //  DashBoard(
                 //   pId: mainPref.MainPId,
                 //   currentLevel: mainPref.MainCurrentLevel,
@@ -173,12 +172,12 @@ class HomeDesignState extends State<HomeDesign>
                 ),
             Center(
               child: Container(
-                  // child: FormuleMainPage(),
-                  ),
+                child: UploadPdf(widget.email),
+              ),
             ),
-            Center(
-                // child: Container(child: LeaderBoard()),
-                ),
+            // Center(
+            //     // child: Container(child: LeaderBoard()),
+            //     ),
             Center(
               child: Container(child: Settings()),
             )

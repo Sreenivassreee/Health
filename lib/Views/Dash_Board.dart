@@ -52,21 +52,21 @@ class _DashBoardState extends State<DashBoard> {
               // "Lenght is ${snapshot.data.documents[0]['EachPara']['sugar']}");
 
               var bpValue = double.parse(
-                  snapshot.data.documents[0]['EachPara'].last['bp']);
+                  snapshot.data.documents.last['EachPara'].last['bp']);
               var bodyTempatatureValue = double.parse(snapshot
-                  .data.documents[0]['EachPara'].last['Body_Tempatature']);
+                  .data.documents.last['EachPara'].last['Body_Tempatature']);
               var respirationValue = double.parse(
-                  snapshot.data.documents[0]['EachPara'].last['Respiration']);
+                  snapshot.data.documents.last['EachPara'].last['Respiration']);
               var glucoseValue = double.parse(
-                  snapshot.data.documents[0]['EachPara'].last['Glucose']);
+                  snapshot.data.documents.last['EachPara'].last['Glucose']);
               var heartRateValue = double.parse(
-                  snapshot.data.documents[0]['EachPara'].last['Heart_Rate']);
+                  snapshot.data.documents.last['EachPara'].last['Heart_Rate']);
               var oxygenSaturationValue = double.parse(snapshot
-                  .data.documents[0]['EachPara'].last['Oxygen_Saturation']);
+                  .data.documents.last['EachPara'].last['Oxygen_Saturation']);
               var electroCardiogramValue = double.parse(snapshot
-                  .data.documents[0]['EachPara'].last['Electro_Cardiogram']);
+                  .data.documents.last['EachPara'].last['Electro_Cardiogram']);
               var updateTime =
-                  snapshot.data.documents[0]['EachPara'].last['UpdateTime'];
+                  snapshot.data.documents.last['EachPara'].last['UpdateTime'];
 
               var bp = bpValue / 120 - 0.25;
               // snapshot.data.documents[0]['EachPara'].last['bp']

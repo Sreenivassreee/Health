@@ -40,6 +40,9 @@ dependencies:
   cloud_firestore: 0.13.5
   fluttertoast: ^7.1.6
   firebase_core: ^0.4.5
+  firebase_storage: ^3.1.0
+  file_picker:
+  giffy_dialog: ^1.8.0
 
 dev_dependencies:
   flutter_test:
