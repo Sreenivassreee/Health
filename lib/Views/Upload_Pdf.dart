@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UploadPdf extends StatefulWidget {
   String email;
@@ -31,6 +32,15 @@ class _UploadPdfState extends State<UploadPdf> {
 
     // final String formatted = formattedDate.format(now);
     print("formatte  " + formattedDate); // something like 2013-04-20
+  }
+
+  downloadPdf(pdfUrl) async {
+    if (await canLaunch(pdfUrl)) {
+      await launch(pdfUrl);
+      print(pdfUrl);
+    } else {
+      throw 'Could not launch $pdfUrl';
+    }
   }
 
   @override
@@ -70,19 +80,82 @@ class _UploadPdfState extends State<UploadPdf> {
                   return CupertinoActivityIndicator();
                 } else {
                   print("Lenght is ${snapshot.data.documents.length}");
+
                   return Center(
                     child: ListView.builder(
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, i) {
                         return Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                "${snapshot.data.documents[i]["Name"]}",
-                                style: TextStyle(fontSize: 18),
-                              )
-                            ],
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Name : ${snapshot.data.documents[i]["Name"]}" ??
+                                            "Name",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Updated Date : ${snapshot.data.documents[i]["Date"]}" ??
+                                            "Date",
+                                        style: TextStyle(color: Colors.green),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Description : ${snapshot.data.documents[i]["Description"]}" ??
+                                            "Description",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        downloadPdf(snapshot.data.documents[i]
+                                            ["DocUrl"]);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: CircleAvatar(
+                                          radius: 17,
+                                          child: Icon(Icons.delete),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        print(
+                                            "${snapshot.data.documents[i]["DocUrl"]}");
+                                        downloadPdf(snapshot.data.documents[i]
+                                            ["DocUrl"]);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: CircleAvatar(
+                                            backgroundColor: Colors.black,
+                                            radius: 17,
+                                            child: Icon(Icons.download_rounded,
+                                                color: Colors.white)),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },

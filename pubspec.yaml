@@ -43,6 +43,8 @@ dependencies:
   firebase_storage: ^3.1.0
   file_picker:
   giffy_dialog: ^1.8.0
+  url_launcher: ^5.7.10
+  advance_pdf_viewer: ^1.2.1+2
 
 dev_dependencies:
   flutter_test:
