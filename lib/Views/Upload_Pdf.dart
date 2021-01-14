@@ -59,8 +59,9 @@ class _UploadPdfState extends State<UploadPdf> {
           return <Widget>[
             CupertinoSliverNavigationBar(
               automaticallyImplyTitle: true,
-              heroTag: "Hero",
+              heroTag: "Heradsfsadfo",
               automaticallyImplyLeading: true,
+              
               backgroundColor: Theme.of(context2).dividerColor,
               largeTitle: Text(
                 'Medical Records',

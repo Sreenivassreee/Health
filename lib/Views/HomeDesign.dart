@@ -175,9 +175,11 @@ class HomeDesignState extends State<HomeDesign>
                 //   currentScore: mainPref.MainCurrentScore,
                 // ),
                 ),
-            Center(
-                // child: Container(child: StepCounter()),
-                ),
+            ThemeConsumer(
+              child: Center(
+                child: Container(child: StepCounter()),
+              ),
+            ),
             Center(
               child: Container(
                 child: UploadPdf(widget.email),

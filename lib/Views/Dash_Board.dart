@@ -28,11 +28,11 @@ class _DashBoardState extends State<DashBoard> {
           return <Widget>[
             CupertinoSliverNavigationBar(
               automaticallyImplyTitle: true,
-              heroTag: "Hero",
+              heroTag: "Herasdfo",
               automaticallyImplyLeading: true,
               backgroundColor: Theme.of(context2).dividerColor,
               largeTitle: Text(
-                'Welcome',
+                'Summary',
                 style: TextStyle(
                   fontFamily: "arial",
                   color: Theme.of(context2).primaryColor,
@@ -116,122 +116,192 @@ class _DashBoardState extends State<DashBoard> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CircleAvatar(
-                            radius: 35,
-                            backgroundColor: Colors.black,
-                            backgroundImage:
-                                NetworkImage(widget.photoUrl ?? ""),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 100.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: bp,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: (bp < 0.5 || bp > 0.75)
-                                  ? Colors.red
-                                  : Color(0xff4285F4),
+                    child: Container(
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.up_arrow,
+                                        color: Colors.red,
+                                        size: 15,
+                                      ),
+                                      SizedBox(
+                                        width: 6,
+                                      ),
+                                      Text(
+                                        "High",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 20, height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Normal",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      SizedBox(
+                                        width: 6,
+                                      ),
+                                      Icon(
+                                        CupertinoIcons.arrow_right,
+                                        color: Colors.green,
+                                        size: 15,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10, height: 10),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Low",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      SizedBox(
+                                        width: 6,
+                                      ),
+                                      Icon(
+                                        CupertinoIcons.down_arrow,
+                                        color: Colors.yellow,
+                                        size: 15,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              height: 100,
+                              width: 70,
                             ),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 130.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: bodyTempatature,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor:
-                                  (bodyTempatature < 0.7196969696969697 ||
-                                          bodyTempatature > 0.75)
-                                      ? Colors.red
-                                      : Color(0xffF4B400),
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 35,
+                                  backgroundColor: Colors.black,
+                                  backgroundImage:
+                                      NetworkImage(widget.photoUrl ?? ""),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 100.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: bp,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: (bp < 0.5 || bp > 0.75)
+                                        ? Colors.red
+                                        : Color(0xff4285F4),
+                                  ),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 130.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: bodyTempatature,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor:
+                                        (bodyTempatature < 0.7196969696969697 ||
+                                                bodyTempatature > 0.75)
+                                            ? Colors.red
+                                            : Color(0xffF4B400),
+                                  ),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 160.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: respiration,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: (respiration < 0.35 ||
+                                            respiration > 0.55)
+                                        ? Colors.red
+                                        : Color(0xff0F9D58),
+                                  ),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 190.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: glucose,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor:
+                                        (glucose < 0.4499 || glucose > 0.75)
+                                            ? Colors.red
+                                            : Color(0xfff37121),
+                                  ),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 220.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: heartRate,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor:
+                                        (heartRate < 0.5 || heartRate > 0.75)
+                                            ? Colors.red
+                                            : Color(0xff9ab3f5),
+                                  ),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 250.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: oxygenSaturation,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: (oxygenSaturation < 0.70 ||
+                                            oxygenSaturation > 0.75)
+                                        ? Colors.red
+                                        : Color(0xFFC1BF8E),
+                                  ),
+                                ),
+                                Center(
+                                  child: CircularPercentIndicator(
+                                    radius: 280.0,
+                                    lineWidth: 14.0,
+                                    animation: true,
+                                    percent: electroCardiogram,
+                                    backgroundColor: Colors.transparent,
+                                    animationDuration: 1000,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: (electroCardiogram < 0.35 ||
+                                            electroCardiogram > 0.75)
+                                        ? Colors.red
+                                        : Color(0xFFD195F9),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 160.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: respiration,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor:
-                                  (respiration < 0.35 || respiration > 0.55)
-                                      ? Colors.red
-                                      : Color(0xff0F9D58),
-                            ),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 190.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: glucose,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor:
-                                  (glucose < 0.4499 || glucose > 0.75)
-                                      ? Colors.red
-                                      : Color(0xfff37121),
-                            ),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 220.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: heartRate,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor:
-                                  (heartRate < 0.5 || heartRate > 0.75)
-                                      ? Colors.red
-                                      : Color(0xff9ab3f5),
-                            ),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 250.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: oxygenSaturation,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: (oxygenSaturation < 0.70 ||
-                                      oxygenSaturation > 0.75)
-                                  ? Colors.red
-                                  : Color(0xFFC1BF8E),
-                            ),
-                          ),
-                          Center(
-                            child: CircularPercentIndicator(
-                              radius: 280.0,
-                              lineWidth: 14.0,
-                              animation: true,
-                              percent: electroCardiogram,
-                              backgroundColor: Colors.transparent,
-                              animationDuration: 1000,
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor: (electroCardiogram < 0.35 ||
-                                      electroCardiogram > 0.75)
-                                  ? Colors.red
-                                  : Color(0xFFD195F9),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

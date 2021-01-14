@@ -70,7 +70,7 @@ class _SettingsState extends State<Settings> {
                 automaticallyImplyLeading: true,
                 actionsForegroundColor: Theme.of(context).primaryColor,
                 backgroundColor: Theme.of(context).dividerColor,
-                heroTag: "Hero0",
+                heroTag: "adsfdsf",
                 largeTitle: Padding(
                   padding: const EdgeInsets.only(top: 10.0, left: 10.0),
                   child: Text(

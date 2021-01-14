@@ -134,6 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  decimal:
+    dependency: "direct main"
+    description:
+      name: decimal
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.5"
   fake_async:
     dependency: transitive
     description:
@@ -415,6 +422,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.2"
+  pedometer:
+    dependency: "direct main"
+    description:
+      name: pedometer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   percent_indicator:
     dependency: "direct main"
     description:
@@ -457,6 +471,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.8"
   rxdart:
     dependency: transitive
     description:
