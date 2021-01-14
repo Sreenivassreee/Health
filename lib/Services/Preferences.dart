@@ -75,50 +75,31 @@ class Pref {
     String _MainEmail;
     String _MainName;
     String _MainPhotoUrl;
-    int _MainCurrentLevel;
     String _MainMobile;
-    int _MainCurrentScore;
-    String _MainPin;
-    String _MainState;
-    String _MainEmailId;
-    String _MainQuali;
-    String _MainAbout;
+    String _MainAge;
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     print(_MainPId = preferences.getString("id"));
     _MainEmail = preferences.getString("email");
     _MainName = preferences.getString("name");
     _MainPhotoUrl = preferences.getString("photoUrl");
-    _MainCurrentLevel = preferences.getInt("Completed_level");
     _MainMobile = preferences.getString("Mobile");
-    _MainCurrentScore = preferences.getInt("Score");
-    _MainEmailId = preferences.getString("gmailId");
-    _MainState = preferences.getString("State");
-    _MainPin = preferences.getString("pin");
-    _MainQuali = preferences.getString("Qualification");
-    _MainAbout = preferences.getString("about");
+    _MainAge = preferences.getString("age");
     // print("mmain Pin i  $_MainPin");
 
     return prefMainModel(
-      MainPId: _MainPId,
-      MainCurrentLevel: _MainCurrentLevel,
-      MainCurrentScore: _MainCurrentScore,
-      MainEmail: _MainEmail,
-      MainMobile: _MainMobile,
-      MainName: _MainName,
-      MainPhotoUrl: _MainPhotoUrl,
-      MainPin: _MainPin,
-      MainState: _MainState,
-      EmailId: _MainEmailId,
-      quali: _MainQuali,
-      about: _MainAbout,
+      mainPId: _MainPId,
+      mainEmail: _MainEmail,
+      mainMobile: _MainMobile,
+      mainName: _MainName,
+      mainPhotoUrl: _MainPhotoUrl,
+      mainAge: _MainAge,
     );
   }
 
   static saveLoginStatusPrif() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("ISLOGIN", "TRUE");
-    
   }
 
   static Future<String> saveLoginStatusPrifFalse() async {
@@ -130,14 +111,14 @@ class Pref {
   static Future<String> updateProfilePref(
       {String name,
       String mobile,
-      String pin,
+      String age,
       String state,
       String quali}) async {
     String _mess;
     SharedPreferences _preferences = await SharedPreferences.getInstance();
     _preferences.setString("name", name);
     _preferences.setString("Mobile", mobile);
-    _preferences.setString("pin", pin);
+    _preferences.setString("age", age);
     _preferences.setString("State", state);
     _preferences.setString("Qualification", quali);
     _mess = "Sucess";
@@ -195,6 +176,7 @@ class FirePref {
     print("pref User is ${user.name}");
     String _mess;
     SharedPreferences preferences = await SharedPreferences.getInstance();
+    print("INSIDE Prif");
     print(user.name);
     print(user.uid);
 
@@ -215,14 +197,8 @@ class FirePref {
     String _MainEmail;
     String _MainName;
     String _MainPhotoUrl;
-    int _MainCurrentLevel;
     String _MainMobile;
-    int _MainCurrentScore;
-    String _MainPin;
-    String _MainState;
-    String _MainEmailId;
-    String _MainQuali;
-    String _MainAbout;
+    String _MainAge;
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     // _Mainid = preferences.getString("id");
@@ -230,29 +206,20 @@ class FirePref {
     _MainEmail = preferences.getString("email");
     _MainName = preferences.getString("name");
     _MainPhotoUrl = preferences.getString("photoUrl");
-    _MainCurrentLevel = preferences.getInt("Completed_level");
+
     _MainMobile = preferences.getString("Mobile");
-    _MainCurrentScore = preferences.getInt("Score");
-    _MainEmailId = preferences.getString("gmailId");
-    _MainState = preferences.getString("State");
-    _MainPin = preferences.getString("pin");
-    _MainQuali = preferences.getString("Qualification");
-    _MainAbout = preferences.getString("about");
+
+    _MainAge = preferences.getString("age");
+
     // print("mmain Pin i  $_MainPin");
 
     return prefMainModel(
-      MainPId: _MainPId,
-      MainCurrentLevel: _MainCurrentLevel,
-      MainCurrentScore: _MainCurrentScore,
-      MainEmail: _MainEmail,
-      MainMobile: _MainMobile,
-      MainName: _MainName,
-      MainPhotoUrl: _MainPhotoUrl,
-      MainPin: _MainPin,
-      MainState: _MainState,
-      EmailId: _MainEmailId,
-      quali: _MainQuali,
-      about: _MainAbout,
+      mainPId: _MainPId,
+      mainEmail: _MainEmail,
+      mainMobile: _MainMobile,
+      mainName: _MainName,
+      mainPhotoUrl: _MainPhotoUrl,
+      mainAge: _MainAge,
     );
   }
 }

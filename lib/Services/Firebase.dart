@@ -201,22 +201,21 @@ class Fire {
   //   }
   // }
 
-  static Future<String> updateProfile({
-    String userId,
-    String name,
-    String mobile,
-    String pin,
-    String state,
-    String quali,
-  }) async {
+  static Future<String> updateProfile(
+      {String userId,
+      String name,
+      String mobile,
+      String age,
+      
+      
+      String email}) async {
     String _mess;
     try {
-      usersReference.document(userId).updateData({
+      usersReference.document(email).updateData({
         "name": name,
         "mobile": mobile,
-        "state": state,
-        "qualification": quali,
-        "pin": pin,
+       
+        "age": age,
       });
 
       _mess = "Sucess";

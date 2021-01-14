@@ -1,28 +1,17 @@
 class prefMainModel {
-  String MainPId;
-  String MainEmail;
-  String MainName;
-  String MainPhotoUrl;
-  int MainCurrentLevel;
-  String MainMobile;
-  int MainCurrentScore;
-  String MainPin;
-  String MainState;
-  String EmailId;
-  String quali;
-  String about;
+  String mainPId;
+  String mainEmail;
+  String mainName;
+  String mainPhotoUrl;
+  String mainMobile;
+  String mainAge;
 
-  prefMainModel(
-      {this.MainPId,
-      this.MainEmail,
-      this.MainName,
-      this.MainPhotoUrl,
-      this.MainCurrentLevel,
-      this.MainCurrentScore,
-      this.MainMobile,
-      this.MainPin,
-      this.MainState,
-      this.EmailId,
-      this.about,
-      this.quali});
+  prefMainModel({
+    this.mainPId,
+    this.mainEmail,
+    this.mainName,
+    this.mainPhotoUrl,
+    this.mainMobile,
+    this.mainAge,
+  });
 }

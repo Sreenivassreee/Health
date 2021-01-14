@@ -42,8 +42,8 @@ class _IntroScreenState extends State<IntroScreen> {
   // }
 
   checkNetWork() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var isLogin = preferences.getString("ISLOGIN");
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      var isLogin = preferences.getString("ISLOGIN");
     var email = preferences.getString("email");
     var photo = preferences.getString("photoUrl");
 
@@ -61,7 +61,7 @@ class _IntroScreenState extends State<IntroScreen> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) => ThemeConsumer(
-                child: HomeDesign(email, photo),
+                child: HomeDesign(email, photo, ),
               ),
             ),
           );

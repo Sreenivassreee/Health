@@ -1,9 +1,11 @@
 import 'package:Health/Services/Global.dart';
+import 'package:Health/Views/Profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
-
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 class Settings extends StatefulWidget {
@@ -15,12 +17,29 @@ class _SettingsState extends State<Settings> {
   var WhatsAppNofi = false;
   var SMSNofi = false;
   var MailNofi = false;
+  var photoUrl;
+  // void initState() async {
+  //   // data();
+
+  //   super.initState();
+  //   // geturl();
+  //   //1
+  // }
+  @override
   void initState() {
-    // data();
-
     super.initState();
+    geturl();
+  }
 
-    //1
+  geturl() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      photoUrl = preferences.getString("photoUrl");
+    });
+    print("photoUrl");
+
+    print(photoUrl);
   }
 
   final TextStyle whiteText = TextStyle(
@@ -77,13 +96,13 @@ class _SettingsState extends State<Settings> {
                     SizedBox(height: 15.0),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ThemeConsumer(
-                        //       child: Profile(),
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ThemeConsumer(
+                              child: Profile(),
+                            ),
+                          ),
+                        );
                       },
                       child: Card(
                         elevation: 0,
@@ -103,9 +122,10 @@ class _SettingsState extends State<Settings> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: CachedNetworkImageProvider(
-                                        //   widget.MainData["MainPhotoUrl"] == null
-                                        // ?
-                                        "https://www.pngitem.com/pimgs/m/391-3918613_personal-service-platform-person-icon-circle-png-transparent.png"
+                                        photoUrl ??
+                                            //   widget.MainData["MainPhotoUrl"] == null
+                                            // ?
+                                            "https://www.pngitem.com/pimgs/m/391-3918613_personal-service-platform-person-icon-circle-png-transparent.png"
                                         //       : widget.MainData["MainPhotoUrl"],
                                         ),
                                     fit: BoxFit.cover,
@@ -120,7 +140,7 @@ class _SettingsState extends State<Settings> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Text(
-                                  "MainName",
+                                  "Profile",
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:Health/Views/Dash_Board.dart';
 import 'package:Health/Views/Settings.dart';
+import 'package:Health/Views/StepCounter.dart';
 import 'package:Health/Views/Upload_Pdf.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,12 @@ class HomeDesign extends StatefulWidget {
   // final VoidCallback signOut;
   var data;
   String email, photoUrl;
+
   // final currentScore, currentLevel;
-  HomeDesign(this.email, this.photoUrl);
+  HomeDesign(
+    this.email,
+    this.photoUrl,
+  );
   @override
   HomeDesignState createState() => HomeDesignState();
 }
@@ -104,7 +109,7 @@ class HomeDesignState extends State<HomeDesign>
                 IconButton(
                   iconSize: 25.0,
                   padding: EdgeInsets.only(left: 28.0),
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.home_filled),
                   color: col == 0 ? Colors.orange[800] : Colors.white,
                   onPressed: () {
                     setState(() {
@@ -114,7 +119,7 @@ class HomeDesignState extends State<HomeDesign>
                 ),
                 IconButton(
                   iconSize: 25.0,
-                  icon: Icon(Icons.menu_book_rounded),
+                  icon: Icon(Icons.directions_run_rounded),
                   color: col == 1 ? Colors.orange[800] : Colors.white,
                   onPressed: () {
                     setState(() {
@@ -122,20 +127,20 @@ class HomeDesignState extends State<HomeDesign>
                     });
                   },
                 ),
-                // IconButton(
-                //   iconSize: 25.0,
-                //   icon: Icon(Icons.developer_board),
-                //   color: col == 2 ? Colors.orange[800] : Colors.white,
-                //   onPressed: () {
-                //     setState(() {
-                //       _myPage.jumpToPage(2);
-                //     });
-                //   },
-                // ),
+                IconButton(
+                  iconSize: 25.0,
+                  icon: Icon(CupertinoIcons.doc_append),
+                  color: col == 2 ? Colors.orange[800] : Colors.white,
+                  onPressed: () {
+                    setState(() {
+                      _myPage.jumpToPage(2);
+                    });
+                  },
+                ),
                 IconButton(
                   iconSize: 25.0,
                   padding: EdgeInsets.only(right: 28.0),
-                  icon: Icon(Icons.settings),
+                  icon: Icon(CupertinoIcons.settings_solid),
                   color: col == 3 ? Colors.orange[800] : Colors.white,
                   onPressed: () {
                     setState(() {
@@ -171,13 +176,13 @@ class HomeDesignState extends State<HomeDesign>
                 // ),
                 ),
             Center(
+                // child: Container(child: StepCounter()),
+                ),
+            Center(
               child: Container(
                 child: UploadPdf(widget.email),
               ),
             ),
-            // Center(
-            //     // child: Container(child: LeaderBoard()),
-            //     ),
             Center(
               child: Container(child: Settings()),
             )
