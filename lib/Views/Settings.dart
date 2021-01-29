@@ -1,5 +1,7 @@
+import 'package:Health/Services/Firebase.dart';
 import 'package:Health/Services/Global.dart';
 import 'package:Health/Views/Profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,7 +19,9 @@ class _SettingsState extends State<Settings> {
   var WhatsAppNofi = false;
   var SMSNofi = false;
   var MailNofi = false;
-  var photoUrl;
+  var photoUrl, email;
+  final usersReference = Firestore.instance.collection("Users");
+
   // void initState() async {
   //   // data();
 
@@ -25,10 +29,25 @@ class _SettingsState extends State<Settings> {
   //   // geturl();
   //   //1
   // }
+
   @override
   void initState() {
     super.initState();
     geturl();
+  }
+
+  getNotiData() async {
+    var documentSnapshot = await usersReference
+        .document(email)
+        .collection("EachPara")
+        .document("Notifications")
+        .get();
+
+    setState(() {
+      WhatsAppNofi = documentSnapshot.data['whatsapp'] ?? false;
+      SMSNofi = documentSnapshot.data['sms'] ?? false;
+      MailNofi = documentSnapshot.data['mail'] ?? false;
+    });
   }
 
   geturl() async {
@@ -36,10 +55,11 @@ class _SettingsState extends State<Settings> {
 
     setState(() {
       photoUrl = preferences.getString("photoUrl");
+      email = preferences.getString("email");
     });
-    print("photoUrl");
-
-    print(photoUrl);
+    print("email");
+    getNotiData();
+    print(email);
   }
 
   final TextStyle whiteText = TextStyle(
@@ -175,9 +195,15 @@ class _SettingsState extends State<Settings> {
                                 });
                               },
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              var S = await Fire.whatsAppNotifications(
+                                email,
+                                WhatsAppNofi,
+                              );
                               setState(() {
-                                WhatsAppNofi = !WhatsAppNofi;
+                                if (S != null) {
+                                  WhatsAppNofi = !WhatsAppNofi;
+                                }
                               });
                             },
                           ),
@@ -197,7 +223,9 @@ class _SettingsState extends State<Settings> {
                                 });
                               },
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              await Fire.smsNotifications(email, SMSNofi);
+
                               setState(() {
                                 SMSNofi = !SMSNofi;
                               });
@@ -219,7 +247,9 @@ class _SettingsState extends State<Settings> {
                                 });
                               },
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              await Fire.mailNotifications(email, MailNofi);
+
                               setState(() {
                                 MailNofi = !MailNofi;
                               });

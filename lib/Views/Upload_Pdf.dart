@@ -61,7 +61,6 @@ class _UploadPdfState extends State<UploadPdf> {
               automaticallyImplyTitle: true,
               heroTag: "Heradsfsadfo",
               automaticallyImplyLeading: true,
-              
               backgroundColor: Theme.of(context2).dividerColor,
               largeTitle: Text(
                 'Medical Records',
@@ -78,89 +77,95 @@ class _UploadPdfState extends State<UploadPdf> {
               stream: _query,
               builder: (BuildContext context, snapshot) {
                 if (!snapshot.hasData) {
-                  return CupertinoActivityIndicator();
+                  return Center(child: CupertinoActivityIndicator());
                 } else {
                   print("Lenght is ${snapshot.data.documents.length}");
 
                   return Center(
-                    child: ListView.builder(
-                      itemCount: snapshot.data.documents.length,
-                      itemBuilder: (context, i) {
-                        return Card(
-                          elevation: 0.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                    child: snapshot.data.documents.length != 0
+                        ? ListView.builder(
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, i) {
+                              return Card(
+                                elevation: 0.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
                                     children: [
-                                      Text(
-                                        "Name : ${snapshot.data.documents[i]["Name"]}" ??
-                                            "Name",
-                                        style: TextStyle(
-                                          fontSize: 20,
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Name : ${snapshot.data.documents[i]["Name"]}" ??
+                                                  "Name",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Updated Date : ${snapshot.data.documents[i]["Date"]}" ??
+                                                  "Date",
+                                              style: TextStyle(
+                                                  color: Colors.green),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Description : ${snapshot.data.documents[i]["Description"]}" ??
+                                                  "Description",
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "Updated Date : ${snapshot.data.documents[i]["Date"]}" ??
-                                            "Date",
-                                        style: TextStyle(color: Colors.green),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "Description : ${snapshot.data.documents[i]["Description"]}" ??
-                                            "Description",
-                                      ),
+                                      Column(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              downloadPdf(snapshot
+                                                  .data.documents[i]["DocUrl"]);
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: CircleAvatar(
+                                                radius: 17,
+                                                child: Icon(Icons.delete),
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              print(
+                                                  "${snapshot.data.documents[i]["DocUrl"]}");
+                                              downloadPdf(snapshot
+                                                  .data.documents[i]["DocUrl"]);
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: CircleAvatar(
+                                                  backgroundColor: Colors.black,
+                                                  radius: 17,
+                                                  child: Icon(
+                                                      Icons.download_rounded,
+                                                      color: Colors.white)),
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   ),
                                 ),
-                                Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        downloadPdf(snapshot.data.documents[i]
-                                            ["DocUrl"]);
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: CircleAvatar(
-                                          radius: 17,
-                                          child: Icon(Icons.delete),
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        print(
-                                            "${snapshot.data.documents[i]["DocUrl"]}");
-                                        downloadPdf(snapshot.data.documents[i]
-                                            ["DocUrl"]);
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: CircleAvatar(
-                                            backgroundColor: Colors.black,
-                                            radius: 17,
-                                            child: Icon(Icons.download_rounded,
-                                                color: Colors.white)),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                              );
+                            },
+                          )
+                        : Center(child: Text("No Records Found")),
                   );
                 }
               }),

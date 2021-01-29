@@ -27,8 +27,8 @@ class _StepCounterState extends State<StepCounter> {
   double _convert;
   double _kmx;
   double burnedx;
-  double _porciento;
-  int editStepsText = 5000;
+  double _porciento, per;
+  int editStepsText = 50000;
   // double percent=0.1;
   TextEditingController editSteps = TextEditingController();
 
@@ -36,7 +36,6 @@ class _StepCounterState extends State<StepCounter> {
   void initState() {
     super.initState();
     initPlatformState();
-    editStepsText = 5000;
   }
 
   Future<void> initPlatformState() async {
@@ -145,6 +144,8 @@ class _StepCounterState extends State<StepCounter> {
   @override
   Widget build(BuildContext context) {
     //print(_stepCountValue);
+    per = (int.parse(_stepCountValue) / editStepsText);
+
     getBurnedRun();
     return ThemeConsumer(
       child: CupertinoPageScaffold(
@@ -183,15 +184,28 @@ class _StepCounterState extends State<StepCounter> {
                     animation: true,
                     circularStrokeCap: CircularStrokeCap.round,
                     progressColor: Colors.green,
-                    percent: int.parse(_stepCountValue) / editStepsText ?? 5000,
+                    percent: per,
+
                     center: Container(
                       //color: Colors.orange,
-                      child: Text(
-                        '$_stepCountValue',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0,
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '$_stepCountValue',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25.0,
+                            ),
+                          ),
+                          Text(
+                            '/ ${editStepsText}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25.0,
+                            ),
+                          ),
+                        ],
                       ),
                       // height: 50.0,
                       // width: 50.0,
@@ -281,9 +295,6 @@ class _StepCounterState extends State<StepCounter> {
                                                         "Submit",
                                                         textAlign:
                                                             TextAlign.center,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -301,9 +312,6 @@ class _StepCounterState extends State<StepCounter> {
                                                         "Cancel",
                                                         textAlign:
                                                             TextAlign.center,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white),
                                                       ),
                                                     )
                                                   ],
@@ -365,9 +373,9 @@ class _StepCounterState extends State<StepCounter> {
                             "$_km",
                             textAlign: TextAlign.right,
                             style: new TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.white),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
                           ),
                           SizedBox(
                             height: 15,
@@ -387,9 +395,9 @@ class _StepCounterState extends State<StepCounter> {
                             "$_calories",
                             textAlign: TextAlign.right,
                             style: new TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.white),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
                           ),
                           SizedBox(
                             height: 15,
@@ -409,9 +417,9 @@ class _StepCounterState extends State<StepCounter> {
                             "$_stepCountValue",
                             textAlign: TextAlign.right,
                             style: new TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.white),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
                           ),
                           SizedBox(
                             height: 15,

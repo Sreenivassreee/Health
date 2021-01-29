@@ -1,14 +1,12 @@
-import 'package:Health/Services/Global.dart';
 import 'package:Health/Services/Preferences.dart';
 import 'package:Health/models/alreadyDataFromServer.dart';
-import 'package:Health/models/error.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:intl/intl.dart';
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 final usersReference = Firestore.instance.collection("Users");
 
@@ -23,6 +21,7 @@ class Fire {
       //     await usersReference.document(user.email).get();
 
       if (email == user.email) {
+        dammi(user.email);
         Pref.saveLoginStatusPrif();
         _mess = "AlreadyUser";
         usersReference.document(user.email).setData({
@@ -44,6 +43,87 @@ class Fire {
       print(e);
       // logOut(context).whenComplete(() => ErrorPage(context: context));
     }
+  }
+
+  static Future<bool> whatsAppNotifications(email, status) async {
+    bool Sstatus = null;
+    print(status);
+    await usersReference
+        .document(email)
+        .collection('EachPara')
+        .document('Notifications')
+        .updateData({"whatsapp": !status}).whenComplete(
+            () => {Sstatus = status});
+    return Sstatus;
+  }
+
+  static mailNotifications(email, status) async {
+    await usersReference
+        .document(email)
+        .collection('EachPara')
+        .document('Notifications')
+        .updateData({"mail": !status});
+  }
+
+  static smsNotifications(email, status) async {
+    await usersReference
+        .document(email)
+        .collection('EachPara')
+        .document('Notifications')
+        .updateData({"sms": !status});
+  }
+
+  static dammi(email) async {
+    try {
+      DocumentSnapshot document1 = await usersReference
+          .document(email)
+          .collection('EachPara')
+          .document('DocumentDetails')
+          .get();
+      if (document1.data == null) {
+        await usersReference
+            .document(email)
+            .collection('EachPara')
+            .document('DocumentDetails')
+            .setData({});
+      }
+      DocumentSnapshot document2 = await usersReference
+          .document(email)
+          .collection('EachPara')
+          .document('Notifications')
+          .get();
+      if (document2.data == null) {
+        await usersReference
+            .document(email)
+            .collection('EachPara')
+            .document('Notifications')
+            .setData({"mail": false, "whatsapp": false, "sms": false});
+      }
+      DocumentSnapshot document3 = await usersReference
+          .document(email)
+          .collection('EachPara')
+          .document('diseases')
+          .get();
+      if (document3.data == null) {
+        await usersReference
+            .document(email)
+            .collection('EachPara')
+            .document('diseases')
+            .setData({});
+      }
+      DocumentSnapshot document4 = await usersReference
+          .document(email)
+          .collection('EachPara')
+          .document('EachPara')
+          .get();
+      if (document4.data == null) {
+        await usersReference
+            .document(email)
+            .collection('EachPara')
+            .document('EachPara')
+            .setData({});
+      }
+    } catch (e) {}
   }
 
   static Future<alreadyDataFromServer> fireBaseUserData(
@@ -206,15 +286,12 @@ class Fire {
       String name,
       String mobile,
       String age,
-      
-      
       String email}) async {
     String _mess;
     try {
       usersReference.document(email).updateData({
         "name": name,
         "mobile": mobile,
-       
         "age": age,
       });
 

@@ -12,7 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,11 +28,11 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
   TextEditingController phoneNumber = TextEditingController();
 
   bool isLoading = false;
+  bool login = false;
   bool netStatus;
   bool createOne = false;
   bool alreadyHaveAccount = false;
   String accountStatus = " ";
-  GlobalKey<FormState> _userLoginFormKey = GlobalKey();
   final GoogleSignIn _googleSignIn2 =
       GoogleSignIn(scopes: ['email', 'profile']);
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -96,7 +95,7 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                 }
               else
                 {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
@@ -223,6 +222,7 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                                                   setState(() {
                                                     createOne = true;
                                                     alreadyHaveAccount = true;
+                                                    login = true;
                                                     accountStatus =
                                                         "No account found with this email. \n Create one for you ..!!";
                                                   }),
@@ -230,6 +230,7 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                                               else
                                                 {
                                                   setState(() {
+                                                    login = true;
                                                     accountStatus =
                                                         "Account Already Exist \n please use same email to login";
                                                   }),
@@ -242,7 +243,7 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                                   color: Colors.red,
                                   padding: const EdgeInsets.all(8.0),
                                   child: new Text(
-                                    "Submit",
+                                    "Check",
                                   ),
                                 ),
                                 Padding(
@@ -366,53 +367,58 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                             ),
                             FadeAnimation(
                               2.5,
-                              Container(
-                                height: 55,
-                                margin: EdgeInsets.symmetric(horizontal: 50),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.orange[900]),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: FlatButton.icon(
-                                      icon: Icon(FontAwesomeIcons.google,
-                                          color: Colors.white),
-                                      onPressed: () async {
-                                        setState(() {
-                                          _isLoggedIn = true;
-                                        });
-                                        onGoogleSignIn(context);
-                                        // checkNetWork(context).then(
-                                        //   (value) {
-                                        //     print("NetworkValue is $value");
-                                        //     if (value == "Pass") {
-                                        //       onGoogleSignIn(context);
-                                        //       // _login();
-                                        //       setState(
-                                        //         () {
-                                        //           // _isLoggedIn == true;
-                                        //         },
-                                        //       );
-                                        //     }
-                                        //   },
-                                        // );
-                                      },
-                                      label: Expanded(
-                                        child: Text(
-                                          'LOGIN WITH GOOGLE',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15.0,
+                              login
+                                  ? Container(
+                                      height: 55,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 50),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.orange[900]),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: FlatButton.icon(
+                                            icon: Icon(FontAwesomeIcons.google,
+                                                color: Colors.white),
+                                            onPressed: () async {
+                                              setState(() {
+                                                _isLoggedIn = true;
+                                              });
+                                              onGoogleSignIn(context);
+                                              // checkNetWork(context).then(
+                                              //   (value) {
+                                              //     print("NetworkValue is $value");
+                                              //     if (value == "Pass") {
+                                              //       onGoogleSignIn(context);
+                                              //       // _login();
+                                              //       setState(
+                                              //         () {
+                                              //           // _isLoggedIn == true;
+                                              //         },
+                                              //       );
+                                              //     }
+                                              //   },
+                                              // );
+                                            },
+                                            label: Expanded(
+                                              child: Text(
+                                                'LOGIN WITH GOOGLE',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15.0,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                    )
+                                  : Container(),
                             ),
+
                             SizedBox(
                               height: 20,
                             ),
