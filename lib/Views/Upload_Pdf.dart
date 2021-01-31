@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:Health/Services/Firebase.dart';
+import 'package:Health/Controllers/Firebase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -26,11 +24,8 @@ class _UploadPdfState extends State<UploadPdf> {
   void initState() {
     super.initState();
     final DateTime now = DateTime.now();
-
     formattedDate = DateFormat('kk:mm:ss__EEE_d_MMM_yyyy_MM_dd').format(now);
     date2 = DateFormat('kk:mm:ss EEE d MMM yyyy-MM-dd').format(now);
-
-    // final String formatted = formattedDate.format(now);
     print("formatte  " + formattedDate); // something like 2013-04-20
   }
 
@@ -51,7 +46,6 @@ class _UploadPdfState extends State<UploadPdf> {
         .collection("EachPara")
         .document("DocumentDetails")
         .collection("Docs")
-        // .where('email', isEqualTo: widget.email ?? "")
         .snapshots();
     return CupertinoPageScaffold(
       child: NestedScrollView(
@@ -268,10 +262,6 @@ class _UploadPdfState extends State<UploadPdf> {
   }
 
   Future getAndUploadPdf() async {
-    // FilePickerResult result = await FilePicker.platform.pickFiles(
-    //         type: FileType.custom,
-    //         allowedExtensions: ['jpg', 'pdf', 'doc'],
-    //       );
     File file =
         await FilePicker.getFile(type: FileType.custom, fileExtension: 'pdf');
     String fileName = formattedDate + nameOfDoc.text + '.pdf';
@@ -295,12 +285,4 @@ class _UploadPdfState extends State<UploadPdf> {
         .then((v) => {print("vvvvvvvvv " + v)});
     return url;
   }
-// void documentFileUpload(String str) {
-
-//   var data = {
-//     "PDF": str,
-//   };
-//   mainReference.child("Documents").child('pdf').set(data).then((v) {
-//   });
-// }
 }

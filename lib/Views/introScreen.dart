@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:Health/Services/Firebase.dart';
-import 'package:Health/Services/Global.dart';
-import 'package:Health/Services/Preferences.dart';
+import 'package:Health/Controllers/Firebase.dart';
+import 'package:Health/Controllers/Global.dart';
+
 import 'package:Health/Views/GoogleWithLogin.dart';
 import 'package:Health/Views/HomeDesign.dart';
 import 'package:Health/models/error.dart';

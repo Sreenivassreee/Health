@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DashBoard extends StatefulWidget {
   String email, photoUrl;
@@ -28,7 +27,6 @@ class _DashBoardState extends State<DashBoard> {
         .collection('Users')
         .document(widget.email)
         .collection("EachPara")
-        // .where('email', isEqualTo: widget.email ?? "")
         .snapshots();
 
     return CupertinoPageScaffold(
@@ -62,10 +60,6 @@ class _DashBoardState extends State<DashBoard> {
             } else {
               print("Lenght is ${snapshot.data.documents.length}");
               print(snapshot.data);
-
-              // print(
-              // "Lenght is ${snapshot.data.documents[0]['EachPara']['sugar']}");
-
               bpValue = double.parse(
                   snapshot.data.documents[1]['EachPara'].last['bp']);
               bodyTempatatureValue = double.parse(snapshot
@@ -84,47 +78,12 @@ class _DashBoardState extends State<DashBoard> {
                   snapshot.data.documents[1]['EachPara'].last['UpdateTime'];
 
               var bp = bpValue / 120 - 0.25;
-              // snapshot.data.documents[0]['EachPara'].last['bp']
-              // ) /
-              // 1000;
-
               var bodyTempatature = bodyTempatatureValue / 99 - 0.25;
-
-              // snapshot.data
-              // .documents[0]['EachPara'].last['Body_Tempatature']) /
-              // 105 -
-              // 0.25;
-
               var respiration = respirationValue / 16 - 0.25;
-
-              // snapshot
-              // .data.documents[0]['EachPara'].last['Respiration']) /
-              // 20 -
-              // 0.25;
               var glucose = glucoseValue / 200 - 0.25;
-              // snapshot
-              //           .data.documents[0]['EachPara'].last['Glucose']) /
-              //       200 -
-              //   0.25;
               var heartRate = heartRateValue / 80 - 0.25;
-              // snapshot
-              //           .data.documents[0]['EachPara'].last['Heart_Rate']) /
-              //       100 -
-              //   0.25;
-
               var oxygenSaturation = oxygenSaturationValue / 100 - 0.25;
-              // snapshot.data
-              //           .documents[0]['EachPara'].last['Oxygen_Saturation']) /
-              //       120 -
-              //   0.25;
-
               var electroCardiogram = electroCardiogramValue / 100 - 0.25;
-              // snapshot
-              //           .data
-              //           .documents[0]['EachPara']
-              //           .last['Electro_Cardiogram']) /
-              //       100 -
-              //   .25;
 
               return SingleChildScrollView(
                 child: Column(
@@ -474,7 +433,6 @@ class _DashBoardState extends State<DashBoard> {
                                             ),
                                           ],
                                         ),
-
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -494,11 +452,6 @@ class _DashBoardState extends State<DashBoard> {
                                             )
                                           ],
                                         ),
-                                        // Text("$respirationValue"),
-                                        // CircleAvatar(
-                                        //   radius: 6,
-                                        //   backgroundColor: Colors.green,
-                                        // )
                                       ],
                                     ),
                                   ),

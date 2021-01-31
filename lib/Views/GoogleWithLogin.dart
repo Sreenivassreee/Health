@@ -2,9 +2,10 @@
 
 import 'dart:ui';
 
-import 'package:Health/Services/Firebase.dart';
-import 'package:Health/Services/Global.dart';
-import 'package:Health/Services/Preferences.dart';
+import 'package:Health/Controllers/Preferences.dart';
+import 'package:Health/Controllers/Firebase.dart';
+import 'package:Health/Controllers/Global.dart';
+import 'package:Health/Controllers/Preferences.dart';
 import 'package:Health/Views/FadeAnimation.dart';
 import 'package:Health/Views/HomeDesign.dart';
 import 'package:Health/models/error.dart';
@@ -80,7 +81,6 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
 
   void onGoogleSignIn(BuildContext context) async {
     FirebaseUser currentUser = await _handleSignIn();
-
     await Fire.UpDateDetails(
             user: currentUser,
             phoneNumber: phoneNumber.text,
@@ -327,21 +327,6 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                               1.4,
                               Stack(
                                 children: [
-                                  // Padding(
-                                  //   padding: EdgeInsets.symmetric(vertical: 10),
-                                  //   child: Container(
-                                  //     height:
-                                  //         MediaQuery.of(context).size.height /
-                                  //             20,
-                                  //     margin:
-                                  //         EdgeInsets.symmetric(horizontal: 30),
-                                  //     // child: SvgPicture.asset(
-                                  //     //   "assets/images/signup.svg",
-                                  //     //   height: 500,
-                                  //     //   width: 500,
-                                  //     // ),
-                                  //   ),
-                                  // ),
                                   _isLoggedIn
                                       ? Container(
                                           child: Padding(
@@ -387,20 +372,6 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
                                                 _isLoggedIn = true;
                                               });
                                               onGoogleSignIn(context);
-                                              // checkNetWork(context).then(
-                                              //   (value) {
-                                              //     print("NetworkValue is $value");
-                                              //     if (value == "Pass") {
-                                              //       onGoogleSignIn(context);
-                                              //       // _login();
-                                              //       setState(
-                                              //         () {
-                                              //           // _isLoggedIn == true;
-                                              //         },
-                                              //       );
-                                              //     }
-                                              //   },
-                                              // );
                                             },
                                             label: Expanded(
                                               child: Text(
@@ -434,84 +405,5 @@ class _GoogleWithLoginState extends State<GoogleWithLogin> {
         ),
       ),
     );
-
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Login'),
-//         backgroundColor: Colors.black,
-//         elevation: 0,
-//       ),
-//       body: _isLoggedIn == false
-//           ? Center(
-//               child: Container(
-//                 padding: EdgeInsets.all(30),
-//                 decoration: BoxDecoration(),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.center,
-//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                   children: [
-//                     FlutterLogo(
-//                       size: 150,
-//                     ),
-//                     Text(
-//                       'Login to Start',
-//                       textAlign: TextAlign.center,
-//                     ),
-//                     FlatButton(
-//                       color: Colors.red,
-//                       child: Icon(Icons.person),
-    // onPressed: () {
-    // checkNetWork(context).then(
-    //   (value) {
-    //     print("NetworkValue is $value");
-    //     if (value == "Pass") {
-    //       _login();
-    //       setState(
-    //         () {
-    //           _isLoggedIn == true;
-    //         },
-    //       );
-    //     }
-    //   },
-    // );
-//                       },
-//                     ),
-// //              LoginButton(
-// //                text: 'LOGIN WITH GOOGLE',
-// //                icon: FontAwesomeIcons.google,
-// //                color: Colors.black45,
-// //                loginMethod: () => _login(),
-// //              ),
-//                     //  LoginButton(text: 'Continue as Guest', loginMethod: auth.anonLogin)
-//                   ],
-//                 ),
-//               ),
-// //                    LoginButton(), // <-- Built with StreamBuilder
-// //                    UserProfile() // <-- Built with StatefulWidget
-//             )
-//           : Container(
-//               height: MediaQuery.of(context).size.height,
-//               child: Column(
-//                 children: [
-//                   Center(
-//                     child: Container(
-//                         height: 70,
-//                         width: 70,
-//                         child: CupertinoActivityIndicator(
-//                           radius: 40.0,
-//                         )),
-//                   ),
-//                   Text(
-//                     "Setting Up For You...",
-//                     style: TextStyle(color: Colors.green, fontSize: 20.0),
-//                   ),
-//                   Text(
-//                     "Plese Wait Dont Quit",
-//                     style: TextStyle(color: Colors.green, fontSize: 15.0),
-//                   )
-//                 ],
-//               ),
-//             ),
-//     );
   }
 }

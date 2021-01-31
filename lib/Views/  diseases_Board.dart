@@ -16,7 +16,6 @@ class _DiseasesState extends State<Diseases> {
         .collection('Users')
         .document(widget.email)
         .collection("EachPara")
-        // .where('email', isEqualTo: widget.email ?? "")
         .snapshots();
     return StreamBuilder<QuerySnapshot>(
         stream: _query,

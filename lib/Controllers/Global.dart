@@ -1,10 +1,10 @@
-import 'package:Health/Services/Preferences.dart';
+import 'package:Health/Controllers/Preferences.dart';
 import 'package:Health/Views/introScreen.dart';
 import 'package:Health/models/error.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:theme_provider/theme_provider.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';

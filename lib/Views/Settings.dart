@@ -1,12 +1,11 @@
-import 'package:Health/Services/Firebase.dart';
-import 'package:Health/Services/Global.dart';
+import 'package:Health/Controllers/Firebase.dart';
+import 'package:Health/Controllers/Global.dart';
 import 'package:Health/Views/Profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theme_provider/theme_provider.dart';
 
@@ -21,14 +20,6 @@ class _SettingsState extends State<Settings> {
   var MailNofi = false;
   var photoUrl, email;
   final usersReference = Firestore.instance.collection("Users");
-
-  // void initState() async {
-  //   // data();
-
-  //   super.initState();
-  //   // geturl();
-  //   //1
-  // }
 
   @override
   void initState() {
@@ -269,11 +260,6 @@ class _SettingsState extends State<Settings> {
                         title: Text(
                           "Change Theme   ( Dark / Light )",
                         ),
-                        // focusColor: Colors.red,
-                        // subtitle: Text(
-                        //   "English US",
-                        //   style: greyTExt,
-                        // ),
                         trailing: Icon(
                           Icons.keyboard_arrow_right,
                           color: Colors.grey.shade400,
@@ -283,31 +269,7 @@ class _SettingsState extends State<Settings> {
                         },
                       ),
                     ),
-                    // Card(
-                    //   elevation: 0,
-                    //   color: Theme.of(context).dividerColor,
-                    //   child: ListTile(
-                    //     title: Text(
-                    //       "White Theme",
-                    //     ),
-                    //     focusColor: Colors.red,
-                    //     // subtitle: Text(
-                    //     //   "English US",
-                    //     //   style: greyTExt,
-                    //     // ),
-                    //     trailing: Icon(
-                    //       Icons.keyboard_arrow_right,
-                    //       color: Colors.grey.shade400,
-                    //     ),
-                    //     onTap: () {
-                    //       ThemeProvider.controllerOf(context).setTheme("white");
 
-                    //       // ThemeProvider.controllerOf(context).setTheme(pureblack);
-
-                    //       // changeBrightness(context);
-                    //     },
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 20,
                     ),

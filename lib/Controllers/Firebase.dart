@@ -1,4 +1,4 @@
-import 'package:Health/Services/Preferences.dart';
+import 'package:Health/Controllers/Preferences.dart';
 import 'package:Health/models/alreadyDataFromServer.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,8 +17,6 @@ class Fire {
 
     try {
       print("currentAccount.id ${user.email}");
-      // DocumentSnapshot documentSnapshot =
-      //     await usersReference.document(user.email).get();
 
       if (email == user.email) {
         dammi(user.email);
@@ -188,92 +186,6 @@ class Fire {
     return _mess;
   }
 
-  static Future<String> fireUpdaeScore(String id, int upScore) async {
-    String _mess;
-    final usersReference = Firestore.instance.collection("Users");
-
-    try {
-      usersReference.document(id).updateData({
-        "currentScore": upScore,
-      });
-      _mess = "Sucess";
-    } catch (e) {
-      _mess = "Failed";
-    }
-    return _mess;
-  }
-
-  static Future<String> updateLevelPercentageFire(
-      String id, int level, String per) async {
-    String _mess;
-    print("Per $per");
-    // DocumentSnapshot documentSnapshot = await usersReference
-    //     .document(id)
-    //     .collection("LevelPercentages")
-    //     .document("LevelByPer")
-    //     .get();
-    // var a = documentSnapshot.data["LevelByPer"];
-
-    // print("documentSnapshot.data${a}");
-
-    // if (documentSnapshot.exists) {
-    try {
-      Firestore.instance
-          .collection("Users")
-          .document(id)
-          .collection("LevelPercentages")
-          .document("LevelByPer")
-          .setData({
-        // "LevelByPer": FieldValue.arrayUnion([
-        level.toString(): {
-          "Level": level,
-          "percentage": per.toString(),
-        }
-        // ])
-      }, merge: true);
-
-      // )
-      // .document(level.toString())
-      // .updateData
-      // ({
-      // "level": level,
-      // "percentage": per.toString(),
-      // });
-      _mess = "Sucess";
-    } catch (e) {
-      _mess = "Failed";
-    }
-    // } else {
-    // try {
-    //   usersReference
-    //       .document(id)
-    //       .collection("LevelPercentages")
-    //       .document("LevelByPer")
-    //       .updateData({
-    //     // "LevelByPer": FieldValue.arrayUnion([
-    //       {
-    //         "Level": level,
-    //         "percentage": per.toString(),
-    //       }
-    //     // ])
-    //   }, merge: true);
-    // usersReference
-    //     .document(id)
-    //     .collection("LevelPercentages")
-    //     .document(level.toString())
-    //     .setData({
-    //   "level": level,
-    //   "percentage": per.toString(),
-    // });
-    // _mess = "Sucess";
-    // } catch (e) {
-    //   _mess = "Failed";
-    // }
-    // }
-
-    return _mess;
-  }
-
   // fetchLevels(id) {
   //   Future<QuerySnapshot> data=usersReference.document(id).collection("LevelPercentages").getDocuments();
   //   if(data!=null){
@@ -295,22 +207,6 @@ class Fire {
         "age": age,
       });
 
-      _mess = "Sucess";
-    } catch (e) {
-      _mess = "Failed";
-    }
-    return _mess;
-  }
-
-  static Future<String> saveAbout({String userId, String about}) async {
-    print(userId);
-    String _mess;
-    try {
-      usersReference.document(userId).updateData(
-        {
-          "about": about.toString(),
-        },
-      );
       _mess = "Sucess";
     } catch (e) {
       _mess = "Failed";

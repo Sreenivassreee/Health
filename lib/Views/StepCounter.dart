@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pedometer/pedometer.dart';
-import 'package:decimal/decimal.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 class StepCounter extends StatefulWidget {
@@ -27,9 +26,8 @@ class _StepCounterState extends State<StepCounter> {
   double _convert;
   double _kmx;
   double burnedx;
-  double _porciento, per;
+  double per;
   int editStepsText = 50000;
-  // double percent=0.1;
   TextEditingController editSteps = TextEditingController();
 
   @override
@@ -43,7 +41,6 @@ class _StepCounterState extends State<StepCounter> {
     _pedestrianStatusStream
         .listen(onPedestrianStatusChanged)
         .onError(onPedestrianStatusError);
-
     _stepCountStream = Pedometer.stepCountStream;
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
 
@@ -51,8 +48,6 @@ class _StepCounterState extends State<StepCounter> {
   }
 
   void onStepCount(StepCount event) {
-    print(event);
-
     _onData(event.steps);
   }
 
@@ -66,26 +61,18 @@ class _StepCounterState extends State<StepCounter> {
     setState(() {});
   }
 
-  void onStepCountError(error) {
-    print('onStepCountError: $error');
-    setState(() {});
-  }
-
-  //inicia codigo pedometer
+  void onStepCountError(error) {}
 
   void _onData(int stepCountValue) async {
-    // print(stepCountValue); //impresion numero pasos por consola
     setState(() {
       _stepCountValue = "$stepCountValue";
-      // print(_stepCountValue);
     });
 
-    var dist = stepCountValue; //pasamos el entero a una variable llamada dist
-    double y = (dist + .0); //lo convertimos a double una forma de varias
+    var dist = stepCountValue;
+    double y = (dist + .0);
 
     setState(() {
-      _numerox =
-          y; //lo pasamos a un estado para ser capturado ya convertido a double
+      _numerox = y;
     });
 
     var long3 = (_numerox);
@@ -114,38 +101,29 @@ class _StepCounterState extends State<StepCounter> {
     });
   }
 
-  //function to determine the distance run in kilometers using number of steps
   void getDistanceRun(double _numerox) {
     var distance = ((_numerox * 78) / 100000);
     distance = num.parse(distance.toStringAsFixed(2)); //dos decimales
     var distancekmx = distance * 34;
     distancekmx = num.parse(distancekmx.toStringAsFixed(2));
-    //print(distance.runtimeType);
     setState(() {
       _km = "$distance";
-      //print(_km);
     });
     setState(() {
       _kmx = num.parse(distancekmx.toStringAsFixed(2));
     });
   }
 
-  //function to determine the calories burned in kilometers using number of steps
   void getBurnedRun() {
     setState(() {
-      var calories = _kmx; //dos decimales
+      var calories = _kmx;
       _calories = "$calories";
-      //print(_calories);
     });
   }
 
-  //fin codigo pedometer
-
   @override
   Widget build(BuildContext context) {
-    //print(_stepCountValue);
     per = (int.parse(_stepCountValue) / editStepsText);
-
     getBurnedRun();
     return ThemeConsumer(
       child: CupertinoPageScaffold(

@@ -1,10 +1,9 @@
-import 'package:Health/Services/Firebase.dart';
-import 'package:Health/Services/Preferences.dart';
+import 'package:Health/Controllers/Firebase.dart';
+import 'package:Health/Controllers/Preferences.dart';
 import 'package:Health/models/PrefData.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class Profile extends StatefulWidget {
   // Map ProfileData;
@@ -19,10 +18,8 @@ class MapScreenState extends State<Profile>
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController mobile = TextEditingController();
-  TextEditingController state = TextEditingController();
+
   TextEditingController age = TextEditingController();
-  TextEditingController quali = TextEditingController();
-  TextEditingController about = TextEditingController();
 
   String photoUrl;
 
@@ -116,30 +113,8 @@ class MapScreenState extends State<Profile>
                                           CrossAxisAlignment.center,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        // CircleAvatar(
-                                        //   radius: 70,
-                                        //   backgroundImage: photoUrl != null
-                                        //       ? NetworkImage(photoUrl)
-                                        //       : Icon(Icons.person),
-                                        // ),
-                                      ],
+                                      children: <Widget>[],
                                     ),
-//                        Padding(
-//                          padding: EdgeInsets.only(top: 90.0, right: 100.0),
-//                          child: new Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: <Widget>[
-//                              new CircleAvatar(
-//                                backgroundColor: Colors.grey,
-//                                radius: 25.0,
-//                                child: new Icon(
-//                                  Icons.camera_alt,
-//                                ),
-//                              )
-//                            ],
-//                          ),
-//                        ),
                                   ],
                                 ),
                               )
@@ -378,26 +353,6 @@ class MapScreenState extends State<Profile>
             textColor: Colors.white,
             color: Colors.green,
             onPressed: () {
-              // final snackBar = SnackBar(
-              //   content: Text('Updated'),
-              // );
-              // _s.currentState.showSnackBar(snackBar);
-              // Scaffold.of(context).showSnackBar(snackBar);
-              // final snackBar = SnackBar(
-              //     content: Text(
-              //   "message",
-              //   style: TextStyle(color: Colors.red),
-              // ));
-
-              // print(name.text);
-              // print(email.text);
-              // print(mobile.text);
-
-              // print(pin.text);
-              // print(state.text);
-              // print(quali.text);
-              // print(ProfileData['Mainid']);
-
               Fire.updateProfile(
                 email: mainProfile.mainEmail,
                 name: name.text,
@@ -408,8 +363,6 @@ class MapScreenState extends State<Profile>
                   Pref.updateProfilePref(
                     name: name.text,
                     mobile: mobile.text,
-                    state: state.text,
-                    quali: quali.text,
                     age: age.text,
                   ).then((_value2) {
                     if (_value2 == "Sucess") {
@@ -424,11 +377,6 @@ class MapScreenState extends State<Profile>
                       );
 
                       _s.currentState.showSnackBar(snackBar);
-
-                      // _snake(
-                      //     message:
-                      //         "Something went Wrong..Please Try Again later");
-
                     }
                   });
                 } else {
@@ -442,24 +390,8 @@ class MapScreenState extends State<Profile>
                   );
 
                   _s.currentState.showSnackBar(snackBar);
-
-                  // _snake(
-                  //     message: "Something went Wrong..Please Try Again later");
-
                 }
               });
-
-              // Pref.getMainPref().then((value) {
-              //   mainProfile = value;
-
-              //   setState(() {
-              //     name.text = mainProfile.MainName;
-              //     mobile.text = mainProfile.MainMobile;
-              //     pin.text = mainProfile.MainPin;
-              //     state.text = mainProfile.MainState;
-              //     quali.text = mainProfile.quali;
-              //   });
-              // });
             },
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(
@@ -469,33 +401,6 @@ class MapScreenState extends State<Profile>
           ),
         ),
       ),
-    );
-  }
-
-  void sAbout() {
-    print("id is ${mainProfile.mainPId}");
-
-    print("id is ${mainProfile.mainPId}");
-
-    Pref.saveAboutPref(about: about.text).then(
-      (_value2) {
-        if (_value2 == "Sucess") {
-          final snackBar = SnackBar(
-            content: Text('Updated'),
-          );
-
-          _s.currentState.showSnackBar(snackBar);
-        } else {
-          final snackBar = SnackBar(
-            content: Text('Something went Wrong.. Try Again'),
-          );
-
-          _s.currentState.showSnackBar(snackBar);
-
-          // _snake(message: "Something went Wrong..Please Try Again later");
-
-        }
-      },
     );
   }
 }
