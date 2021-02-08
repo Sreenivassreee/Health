@@ -1,7 +1,4 @@
-// import 'package:google_sign_in/google_sign_in.dart';
-
 import 'dart:ui';
-
 import 'package:Health/Controllers/Preferences.dart';
 import 'package:Health/Controllers/Firebase.dart';
 import 'package:Health/Controllers/Global.dart';
